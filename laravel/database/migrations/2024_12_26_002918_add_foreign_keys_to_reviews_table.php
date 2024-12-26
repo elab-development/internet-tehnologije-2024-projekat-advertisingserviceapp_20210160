@@ -6,23 +6,23 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
+    public function up()
     {
         Schema::table('reviews', function (Blueprint $table) {
-            //
+            if (Schema::hasColumn('reviews', 'provider_id')) {
+                $table->foreign('provider_id')
+                      ->references('id')
+                      ->on('users')
+                      ->onDelete('cascade')
+                      ->onUpdate('cascade');
+            }
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
         Schema::table('reviews', function (Blueprint $table) {
-            //
+            $table->dropForeign(['provider_id']);
         });
     }
 };

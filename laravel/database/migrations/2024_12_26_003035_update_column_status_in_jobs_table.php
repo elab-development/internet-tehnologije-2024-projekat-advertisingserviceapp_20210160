@@ -6,23 +6,17 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
+    public function up()
     {
-        Schema::table('jobs', function (Blueprint $table) {
-            //
+        Schema::table('appointments', function (Blueprint $table) {
+            $table->string('status')->default('pending')->change();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
-        Schema::table('jobs', function (Blueprint $table) {
-            //
+        Schema::table('appointments', function (Blueprint $table) {
+            $table->integer('status')->default(0)->change();
         });
     }
 };
