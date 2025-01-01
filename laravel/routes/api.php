@@ -7,6 +7,11 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\TimeSlotController;
 
+// csrf routes
+Route::get('/sanctum/csrf-cookie', function () {
+    return response()->json(['status' => 'ok']);
+  })->middleware('log.requests');
+
 // Authentication routes
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login'])->name('login');
