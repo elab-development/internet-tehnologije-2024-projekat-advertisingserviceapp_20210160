@@ -21,8 +21,5 @@ class UserSeeder extends Seeder
             'type' => 'customer'
         ]);
 
-        $this->command->info("Freelancer: $freelancer->id");
-        $this->command->info("Company: $company->id");
-        $this->command->info("Customers: " . $customers->pluck('id')->join(', '));
     }
 }
