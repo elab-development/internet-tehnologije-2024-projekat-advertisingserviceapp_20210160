@@ -32,32 +32,28 @@ Route::get('/providers', [ProviderController::class, 'index']);
 Route::get('/provider/{id}', [ProviderController::class, 'show']);
 
 
-// Route::middleware('auth:sanctum')->group(function () {
+Route::middleware('auth:api')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
 
     Route::get('/user/{id}', function ($id) {
-      $user = \App\Models\User::findOrFail($id);
-  
-      if ($user->type === 'customer') {
-          $customer = \App\Models\Customer::with(['appointments.service', 'appointments.timeSlot'])->find($id);
-          $user->appointments = $customer ? $customer->appointments : [];
-      } else {
-          $user->appointments = [];
-      }
-  
-      return response()->json($user);
-  });
-  
-
+        $user = \App\Models\User::findOrFail($id);
     
+        if ($user->type === 'customer') {
+            $customer = \App\Models\Customer::with(['appointments.service', 'appointments.timeSlot'])->find($id);
+            $user->appointments = $customer ? $customer->appointments : [];
+        } else {
+            $user->appointments = [];
+        }
+    
+        return response()->json($user);
+    });
 
     Route::post('/service', [ServiceController::class, 'store']); 
     Route::put('/service/{id}', [ServiceController::class, 'update']);
     Route::delete('/service/{id}', [ServiceController::class, 'destroy']);
-
 
     Route::post('/appointment', [AppointmentController::class, 'store']);
     Route::put('/appointment/{id}', [AppointmentController::class, 'update']); 
@@ -68,4 +64,4 @@ Route::get('/provider/{id}', [ProviderController::class, 'show']);
     Route::post('/time-slot', [TimeSlotController::class, 'store']);
     Route::put('/time-slot/{id}', [TimeSlotController::class, 'update']);
     Route::delete('/time-slot/{id}', [TimeSlotController::class, 'destroy']);
-// });
+});

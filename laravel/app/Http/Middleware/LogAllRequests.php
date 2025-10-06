@@ -11,6 +11,7 @@ class LogAllRequests
 {
     public function handle(Request $request, Closure $next)
     {
+        /*
         Log::info('Incoming Request', [
             'method' => $request->method(),
             'url' => $request->fullUrl(),
@@ -18,7 +19,7 @@ class LogAllRequests
             'cookies' => $request->cookies->all(),
             'body' => $request->all(),
         ]);
-
+        */
         return $next($request);
     }
 }

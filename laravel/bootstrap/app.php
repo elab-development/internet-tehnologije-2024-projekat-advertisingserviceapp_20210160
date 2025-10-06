@@ -23,7 +23,6 @@ return Application::configure(basePath: dirname(__DIR__))
 
         $middleware->group('api', [
             \App\Http\Middleware\LogAllRequests::class,
-            EnsureFrontendRequestsAreStateful::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ]);
     })

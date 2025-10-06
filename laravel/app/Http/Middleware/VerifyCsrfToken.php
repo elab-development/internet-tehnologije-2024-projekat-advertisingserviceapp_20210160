@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Log;
 class VerifyCsrfToken extends Middleware
 {
     protected $except = [
-        '/sanctum/csrf-cookie',
+        'api/*', 
     ];
   
     protected function tokensMatch($request)
