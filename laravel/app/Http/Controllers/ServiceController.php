@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ServiceController extends Controller
 {
@@ -52,5 +53,19 @@ class ServiceController extends Controller
         $service->delete();
 
         return response()->json(['message' => 'Service deleted']);
+    }
+
+    public function getProviderServices()
+    {
+        $userId = Auth::id();
+
+        if (!$userId) {
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
+
+        // Fetch services where the logged-in user is the provider
+        $services = Service::where('provider_id', $userId)->get();
+
+        return response()->json($services);
     }
 }
