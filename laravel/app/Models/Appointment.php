@@ -24,10 +24,15 @@ class Appointment extends Model
     public function customer()
     {
         return $this->belongsTo(User::class, 'customer_id');
-    }
+    }    
 
     public function timeSlot()
     {
         return $this->belongsTo(TimeSlot::class, 'time_slot_id');
+    }
+
+    public function review()
+    {
+        return $this->hasOne(Review::class, 'appointment_id');
     }
 }
