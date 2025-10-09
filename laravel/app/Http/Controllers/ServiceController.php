@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Exports\ServicesExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ServiceController extends Controller
 {
@@ -67,5 +69,10 @@ class ServiceController extends Controller
         $services = Service::where('provider_id', $userId)->get();
 
         return response()->json($services);
+    }
+
+    public function exportCsv()
+    {
+        return Excel::download(new ServicesExport, 'services.csv');
     }
 }
