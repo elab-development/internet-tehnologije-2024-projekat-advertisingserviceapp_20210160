@@ -1,0 +1,218 @@
+:root {
+  --primary-color: #4a90e2;
+  --secondary-color: #f5f5f5;
+  --accent-color: #50e3c2;
+  --text-color: #333;
+  --border-color: #ddd;
+  --hover-shadow: rgba(0, 0, 0, 0.1);
+  --transition-speed: 0.3s;
+  --max-width: 1200px;
+}
+
+.providers-list {
+  padding: 2rem;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text-color);
+}
+
+.providers-list h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--primary-color);
+  font-size: 2rem;
+}
+
+.filters-container {
+  background-color: var(--secondary-color);
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px var(--hover-shadow);
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.search-filter {
+  flex: 1;
+}
+
+.search-bar {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  transition: border-color var(--transition-speed);
+}
+
+.search-bar:focus {
+  border-color: var(--primary-color);
+  outline: none;
+}
+
+.advanced-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.filter-group {
+  flex: 1;
+  min-width: 200px;
+}
+
+.filter-group label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: var(--text-color);
+}
+
+.filter-group.apply-filters {
+  flex: 1 1 100%; /* Allows the filter group to take full width */
+  display: flex; /* Enables flex layout for alignment */
+  justify-content: center; /* Centers the button horizontally */
+  margin-top: 1rem; /* Adds space above the button */
+}
+
+.apply-filters-button {
+  padding: 0.75rem 1.5rem;
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color var(--transition-speed), transform var(--transition-speed);
+}
+
+.apply-filters-button:hover {
+  transform: translateY(-2px);
+}
+
+.filter-input,
+.filter-select {
+  margin-top: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  transition: border-color var(--transition-speed);
+}
+
+.filter-input:focus,
+.filter-select:focus {
+  border-color: var(--primary-color);
+  outline: none;
+}
+
+.provider-items {
+  list-style-type: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 600px) {
+  .provider-items {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 900px) {
+  .provider-items {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+.provider-item {
+  background-color: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: box-shadow var(--transition-speed), transform var(--transition-speed);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.provider-item:hover {
+  box-shadow: 0 4px 12px var(--hover-shadow);
+  transform: translateY(-4px);
+}
+
+.provider-item h2 {
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  font-size: 1.5rem;
+  color: var(--primary-color);
+}
+
+.provider-item h2 a {
+  text-decoration: none;
+  color: inherit;
+  transition: color var(--transition-speed);
+}
+
+.provider-item h2 a:hover {
+  color: var(--accent-color);
+}
+
+.provider-item p {
+  margin: 0.25rem 0;
+  font-size: 0.95rem;
+}
+
+.provider-item p strong {
+  color: var(--primary-color);
+}
+
+.providers-list p {
+  font-size: 1.1rem;
+  color: var(--text-color);
+}
+
+.verified-checkmark {
+  color: #1bafff;
+  margin-left: 0.5rem;
+  font-size: 1.6rem; 
+  vertical-align: middle;
+}
+
+.export-csv-button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.export-csv-button:hover {
+  background-color: #45a049;
+}
+
+@media (max-width: 600px) {
+  .filters-container {
+    padding: 1rem;
+  }
+
+  .provider-item {
+    padding: 1rem;
+  }
+
+  .provider-item h2 {
+    font-size: 1.25rem;
+  }
+}
+

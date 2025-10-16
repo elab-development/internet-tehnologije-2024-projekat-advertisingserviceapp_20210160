@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Builder;
 
 class Provider extends User
 {
+    protected $table = 'users';
+
     protected static function booted()
     {
         static::addGlobalScope('provider', function (Builder $builder) {
@@ -27,4 +29,4 @@ class Provider extends User
     {
         return $this->hasManyThrough(Appointment::class, Service::class, 'provider_id', 'service_id');
     }
-}
+  }
