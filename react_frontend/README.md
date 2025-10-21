@@ -1,70 +1,203 @@
-# Getting Started with Create React App
+# Service Booking Platform
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## О пројекту
 
-## Available Scripts
+Service Booking Platform је модерна веб апликација за резервацију услуга направљена у Laravel и React технологијама. Платформа омогућава ефикасно повезивање пружалаца услуга са крајњим корисницима кроз интуитиван и резидонзиван интерфејс.
 
-In the project directory, you can run:
+## Кључне карактеристике
 
-### `npm start`
+- **Сигурна аутентификација** - Laravel Passport са JWT токенима
+- **Интегрисани календар** - напредно управљање терминима
+- **Систем оцена и коментара** - транспарентна репутација пружалаца
+- **Напредна претрага и филтрирање** - брзо проналажење услуга
+- **RESTful API** - потпуно одвојена frontend-backend архитектура
+- **CSV извоз података** - могућност преузимања листи
+- **Responsive дизајн** - оптимизован за све уређаје
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Технологије
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Backend
+- **Laravel 11** - PHP framework
+- **MySQL** - релациона база података
+- **Laravel Passport** - OAuth2 аутентификација
+- **Eloquent ORM** - објектно-релациони мапинг
 
-### `npm test`
+### Frontend
+- **React 18** - JavaScript библиотека
+- **Axios** - HTTP клијент
+- **React Router** - навигација
+- **Tailwind CSS** - стилизација
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Архитектура
 
-### `npm run build`
+```
+Frontend (React) ← Axios → Backend (Laravel API) ← Eloquent → MySQL
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Инсталација и покретање
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Предуслови
+- PHP 8.1 или новији
+- Composer
+- Node.js и NPM
+- MySQL база података
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Кораци за инсталацију
 
-### `npm run eject`
+1. **Клонирај репозиторијум**
+```bash
+git clone https://github.com/elab-development/internet-tehnologije-2024-projekat-advertisingserviceapp_20210160.git
+cd service-booking-platform
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+2. **Инсталирај PHP зависимости**
+```bash
+composer install
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+3. **Инсталирај frontend зависимости**
+```bash
+npm install
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+4. **Подеси окружење**
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+5. **Подеси базу података у `.env` фајлу**
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=service_booking
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
-## Learn More
+6. **Покрени миграције и сидер**
+```bash
+php artisan migrate --seed
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+7. **Инсталирај Passport**
+```bash
+php artisan passport:install
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+8. **Покрени development сервер**
+```bash
+# Backend сервер
+php artisan serve
 
-### Code Splitting
+# Frontend сервер (у другом терминалу)
+npm run dev
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Апликација ће бити доступна на:
+- Frontend: `http://localhost:3000`
+- Backend API: `http://localhost:8000`
 
-### Analyzing the Bundle Size
+## Корисничке улоге
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Customer (Корисник услуга)
+- Преглед и претрага услуга
+- Резервација термина
+- Оцењивање и коментарисање услуга
+- Преглед историје резервација
 
-### Making a Progressive Web App
+### Freelancer (Самoстални радник)
+- Креирање и управљање услугама
+- Дефинисање расположивих термина
+- Управљање резервацијама
+- Праћење репутације
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Company (Услужно предузеће)
+- Све функционалности Freelancer улоге
+- Верификовани профил
+- Колективна репутација
+- Могућност ангажовања више радника
 
-### Advanced Configuration
+## API документација
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Јавни endpoints (без аутентификације)
+- `POST /api/register` - Регистрација корисника
+- `POST /api/login` - Пријава корисника
+- `GET /api/services` - Листа услуга
+- `GET /api/providers` - Листа пружалаца
+- `GET /api/appointments` - Листа резервација
 
-### Deployment
+### Заштићени endpoints (захтевају аутентификацију)
+- `GET /api/user` - Профил корисника
+- `POST /api/appointment` - Креирање резервације
+- `POST /api/service` - Креирање услуге (за пружаоце)
+- `POST /api/reviews` - Креирање рецензије
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Пример API позива
+```javascript
+// Пријава корисника
+const response = await axios.post('/api/login', {
+  email: 'customer@example.com',
+  password: 'password'
+});
 
-### `npm run build` fails to minify
+// Добијање листе услуга
+const services = await axios.get('/api/services');
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Тест налози
+
+За тестирање апликације, користите следеће тест налоге:
+
+- **Customer**: customer@example.com / password
+- **Freelancer**: freelancer@example.com / password
+- **Company**: company@example.com / password
+
+## Структура базе података
+
+Апликација користи следеће главне табеле:
+- **users** - Корисници система (сви типови)
+- **services** - Услуге пружалаца
+- **appointments** - Резервације термина
+- **time_slots** - Расположиви термини
+- **reviews** - Оцене и коментари
+
+## Сигурносне карактеристике
+
+- Хеширање лозинки (bcrypt алгоритaм)
+- Заштита од SQL инјекције (Eloquent ORM)
+- CSRF заштита
+- OAuth2 аутентификација (Laravel Passport)
+- Валидација улазних података
+
+## Развојне команде
+
+```bash
+# Генерисање новог контролера
+php artisan make:controller ServiceController --api
+
+# Креирање миграције
+php artisan make:migration create_services_table
+
+# Покретање тестова
+php artisan test
+
+# Ресет базе података
+php artisan migrate:refresh --seed
+```
+
+## Аутори
+
+- **Мина Николић** (2021/0049)
+- **Никола Несторовић** (2021/0160)
+
+**Ментор**: Петар Луковац
+
+## Лиценца
+
+Овај пројекат је развијен као семинарски рад за предмет Веб програмирање на Факултету организационих наука, Универзитет у Београду.
+
+## Подршка
+
+За питања и подршку, контактирајте нас преко GitHub Issues на репозиторијуму пројекта.
